@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BiblioPólo – Requisição de Livros</title>
+<style>
+  :root { --verde:#2f5d1e; --verde-claro:#e8f2e2; --cinza:#8a8a8a; --borda:#c9d3c4; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:Arial, Helvetica, sans-serif; background:#f4f7f2; color:#1c1c1c; }
+  main { max-width:640px; margin:0 auto; padding:24px 16px 48px; }
+  h1 { color:var(--verde); margin:0 0 4px; }
+  p.sub { margin:0 0 24px; color:#444; }
+  label { display:block; font-weight:bold; margin-bottom:8px; }
+  .dd { position:relative; }
+  .dd-btn { width:100%; text-align:left; padding:12px 40px 12px 14px; font-size:16px; background:#fff;
+            border:2px solid var(--borda); border-radius:8px; cursor:pointer; position:relative; font-family:inherit; }
+  .dd-btn:focus-visible { outline:3px solid #7bb35e; }
+  .dd-btn::after { content:"▾"; position:absolute; right:14px; top:50%; transform:translateY(-50%); font-size:18px; color:var(--verde); }
+  .dd-btn[aria-expanded="true"]::after { content:"▴"; }
+  .dd-list { display:none; position:absolute; z-index:10; left:0; right:0; margin:4px 0 0; padding:4px 0; list-style:none;
+             background:#fff; border:2px solid var(--borda); border-radius:8px; max-height:340px; overflow-y:auto; box-shadow:0 6px 18px rgba(0,0,0,.12); }
+  .dd-list.open { display:block; }
+  .dd-item { padding:10px 14px; cursor:pointer; border-bottom:1px solid #eef2ec; }
+  .dd-item:last-child { border-bottom:0; }
+  .dd-item .autor { display:block; font-size:13px; color:#555; }
+  .dd-item.ativo, .dd-item:hover:not(.indisp) { background:var(--verde-claro); }
+  .dd-item.sel { font-weight:bold; }
+  .dd-item.indisp { color:var(--cinza); background:#f1f1f1; cursor:not-allowed; }
+  .dd-item.indisp .autor { color:var(--cinza); }
+  .dd-item .quando { display:block; font-size:13px; font-style:italic; }
+  button.cta { margin-top:20px; width:100%; padding:14px; font-size:17px; font-weight:bold; color:#fff; background:var(--verde);
+               border:0; border-radius:8px; cursor:pointer; font-family:inherit; }
+  button.cta:disabled { background:#b7c4b1; cursor:not-allowed; }
+  .info { margin-top:20px; padding:12px 14px; background:#fff; border-left:5px solid var(--verde); border-radius:4px; font-size:14px; line-height:1.5; }
+  .erro { margin-top:16px; color:#9b1c1c; font-weight:bold; }
+  .rodape { margin-top:28px; font-size:12px; color:#666; }
+</style>
+</head>
+<body>
+<main>
+  <h1>BiblioPólo</h1>
+  <p class="sub">Requisição de Livros</p>
+
+  <label id="lbl" for="btn">Livro pretendido</label>
+  <div class="dd">
+    <button type="button" id="btn" class="dd-btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="lbl btn">A carregar a lista…</button>
+    <ul id="lista" class="dd-list" role="listbox" aria-labelledby="lbl" tabindex="-1"></ul>
+  </div>
+
+  <button type="button" id="continuar" class="cta" disabled>Continuar para o formulário</button>
+  <div id="erro" class="erro" role="alert"></div>
+
+  <div class="info">
+    Escolhe um livro disponível. Os livros a cinzento já estão requisitados e indicam a data prevista de disponibilidade.<br>
+    No passo seguinte indicas o teu nome, a equipa e o email. O prazo de entrega é de 15 dias após o levantamento,
+    e o levantamento e a entrega são feitos com a equipa HPRO.
+  </div>
+  <div class="rodape" id="atualizado"></div>
+</main>
+
+<script>
+// ===== CONFIGURAÇÃO =====
+// Ligação de pré-preenchimento do Forms: no Forms > ⋯ > "Obter ligação de pré-preenchimento",
+// escrever um texto qualquer na pergunta do livro e copiar a ligação. Depois, substituir nela o texto de teste por {LIVRO}.
+const FORMS_URL = "";                       // ex.: "https://forms.office.com/Pages/ResponsePage.aspx?id=...&r1234=%7BLIVRO%7D"
+const DADOS_URL = "livros.json";
+// ========================
+
+const btn = document.getElementById("btn"), lista = document.getElementById("lista"),
+      cta = document.getElementById("continuar"), erro = document.getElementById("erro");
+let livros = [], escolhido = null, indice = -1;
+
+const pad = n => String(n).padStart(2, "0");
+const fmt = iso => { const d = new Date(iso); return `${pad(d.getUTCDate())}/${pad(d.getUTCMonth()+1)}/${d.getUTCFullYear()}`; };
+const chave = t => t.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
+
+function desenhar() {
+  lista.textContent = "";
+  livros.forEach((l, i) => {
+    const li = document.createElement("li");
+    li.className = "dd-item" + (l.disponivel ? "" : " indisp") + (escolhido === l ? " sel" : "");
+    li.setAttribute("role", "option");
+    li.setAttribute("aria-selected", escolhido === l ? "true" : "false");
+    if (!l.disponivel) li.setAttribute("aria-disabled", "true");
+    li.dataset.i = i;
+    const t = document.createElement("span"); t.textContent = l.titulo; li.appendChild(t);
+    const a = document.createElement("span"); a.className = "autor"; a.textContent = l.autor; li.appendChild(a);
+    if (!l.disponivel) {
+      const q = document.createElement("span"); q.className = "quando";
+      q.textContent = l.disponivelAPartir ? "Indisponível – disponível a partir de " + fmt(l.disponivelAPartir) : "Indisponível";
+      li.appendChild(q);
+    }
+    li.addEventListener("click", () => escolher(i));
+    lista.appendChild(li);
+  });
+}
+function abrir(v) {
+  lista.classList.toggle("open", v); btn.setAttribute("aria-expanded", v ? "true" : "false");
+  if (v) { indice = Math.max(0, livros.indexOf(escolhido)); marcar(); }
+}
+function marcar() {
+  [...lista.children].forEach((li, i) => li.classList.toggle("ativo", i === indice));
+  const el = lista.children[indice]; if (el) el.scrollIntoView({ block: "nearest" });
+}
+function escolher(i) {
+  if (!livros[i].disponivel) return;
+  escolhido = livros[i]; btn.textContent = escolhido.titulo + " — " + escolhido.autor;
+  cta.disabled = false; erro.textContent = ""; desenhar(); abrir(false); btn.focus();
+}
+btn.addEventListener("click", () => abrir(!lista.classList.contains("open")));
+document.addEventListener("click", e => { if (!e.target.closest(".dd")) abrir(false); });
+btn.addEventListener("keydown", e => {
+  const aberto = lista.classList.contains("open");
+  if (e.key === "ArrowDown") { e.preventDefault(); if (!aberto) abrir(true); else { indice = Math.min(livros.length-1, indice+1); marcar(); } }
+  else if (e.key === "ArrowUp") { e.preventDefault(); if (aberto) { indice = Math.max(0, indice-1); marcar(); } }
+  else if ((e.key === "Enter" || e.key === " ") && aberto) { e.preventDefault(); escolher(indice); }
+  else if (e.key === "Escape") abrir(false);
+});
+cta.addEventListener("click", () => {
+  if (!escolhido) return;
+  if (!FORMS_URL) { erro.textContent = "Ligação ao formulário ainda não configurada."; return; }
+  window.location.href = FORMS_URL.replace("{LIVRO}", encodeURIComponent(escolhido.titulo));
+});
+
+fetch(DADOS_URL, { cache: "no-store" }).then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }).then(d => {
+  livros = d.livros.map(l => ({ ...l, disponivel: l.estado === "Disponível" }))
+                   .sort((a, b) => chave(a.titulo).localeCompare(chave(b.titulo), "pt"));
+  btn.textContent = "Seleciona um livro";
+  desenhar();
+  if (d.atualizado) document.getElementById("atualizado").textContent = "Lista atualizada em " + fmt(d.atualizado) + ".";
+}).catch(() => { btn.textContent = "Não foi possível carregar a lista"; erro.textContent = "Tenta novamente mais tarde."; });
+</script>
+</body>
+</html>
