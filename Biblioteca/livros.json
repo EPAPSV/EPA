@@ -1,0 +1,250 @@
+{
+  "atualizado": "2026-11-24T14:00:00Z",
+  "livros": [
+    {
+      "id": "L001",
+      "titulo": "A estranha ordem das coisas",
+      "autor": "António Damásio",
+      "estado": "Disponível",
+      "disponivelAPartir": null
+    },
+    {
+      "id": "L002",
+      "titulo": "A Força das palavras",
+      "autor": "Gustavo Santos",
+      "estado": "Disponível",
+      "disponivelAPartir": null
+    },
+    {
+      "id": "L003",
+      "titulo": "A Força do otimismo",
+      "autor": "Luís Rojas Marcos",
+      "estado": "Disponível",
+      "disponivelAPartir": null
+    },
+    {
+      "id": "L004",
+      "titulo": "A Maldição",
+      "autor": "John Grisham",
+      "estado": "Disponível",
+      "disponivelAPartir": null
+    },
+    {
+      "id": "L005",
+      "titulo": "A Melodia do Adeus",
+      "autor": "Nicholas Sparks",
+      "estado": "Disponível",
+      "disponivelAPartir": null
+    },
+    {
+      "id": "L006",
+      "titulo": "A saúde pelos citrinos",
+      "autor": "Sylvie Haineault",
+      "estado": "Disponível",
+      "disponivelAPartir": null
+    },
+    {
+      "id": "L007",
+      "titulo": "A vegetariana",
+      "autor": "Hang Kang",
+      "estado": "Disponível",
+      "disponivelAPartir": null
+    },
+    {
+      "id": "L008",
+      "titulo": "A Vida é uma anedota",
+      "autor": "Pedro Ribeiro",
+      "estado": "Disponível",
+      "disponivelAPartir": null
+    },
+    {
+      "id": "L009",
+      "titulo": "A vida feliz",
+      "autor": "Elena Varvello",
+      "estado": "Disponível",
+      "disponivelAPartir": null
+    },
+    {
+      "id": "L010",
+      "titulo": "A vida mentirosa dos adultos",
+      "autor": "Elena Ferrante",
+      "estado": "Disponível",
+      "disponivelAPartir": null
+    },
+    {
+      "id": "L011",
+      "titulo": "Agarra o agora",
+      "autor": "Gustavo Santos",
+      "estado": "Disponível",
+      "disponivelAPartir": null
+    },
+    {
+      "id": "L012",
+      "titulo": "As asas do perdão",
+      "autor": "Kyle Gray",
+      "estado": "Disponível",
+      "disponivelAPartir": null
+    },
+    {
+      "id": "L013",
+      "titulo": "Como fazer os outros gostar de si",
+      "autor": "Nicholas Boothman",
+      "estado": "Disponível",
+      "disponivelAPartir": null
+    },
+    {
+      "id": "L014",
+      "titulo": "Dar ao pedal",
+      "autor": "Jorge Serqueira",
+      "estado": "Disponível",
+      "disponivelAPartir": null
+    },
+    {
+      "id": "L015",
+      "titulo": "Em nome do pai",
+      "autor": "Nuno Lobo Antunes",
+      "estado": "Disponível",
+      "disponivelAPartir": null
+    },
+    {
+      "id": "L016",
+      "titulo": "Faz um restart à tua vida",
+      "autor": "Jorge Coutinho",
+      "estado": "Disponível",
+      "disponivelAPartir": null
+    },
+    {
+      "id": "L017",
+      "titulo": "Felizes para sempre",
+      "autor": "Nora Roberts",
+      "estado": "Disponível",
+      "disponivelAPartir": null
+    },
+    {
+      "id": "L018",
+      "titulo": "Festa de família",
+      "autor": "Sveva Casati Modignani",
+      "estado": "Disponível",
+      "disponivelAPartir": null
+    },
+    {
+      "id": "L019",
+      "titulo": "Inferno no Vaticano",
+      "autor": "Flávio Capuleto",
+      "estado": "Disponível",
+      "disponivelAPartir": null
+    },
+    {
+      "id": "L020",
+      "titulo": "Intoxicação Digital",
+      "autor": "Augusto Cury",
+      "estado": "Disponível",
+      "disponivelAPartir": null
+    },
+    {
+      "id": "L021",
+      "titulo": "Não forces a vida flui",
+      "autor": "Manuel Clemente",
+      "estado": "Disponível",
+      "disponivelAPartir": null
+    },
+    {
+      "id": "L022",
+      "titulo": "No céu tudo é perfeito",
+      "autor": "Annie Kagan",
+      "estado": "Disponível",
+      "disponivelAPartir": null
+    },
+    {
+      "id": "L023",
+      "titulo": "O sentido da vida",
+      "autor": "Alberto Lopes",
+      "estado": "Disponível",
+      "disponivelAPartir": null
+    },
+    {
+      "id": "L024",
+      "titulo": "O último Papa",
+      "autor": "Luís Miguel Rocha",
+      "estado": "Disponível",
+      "disponivelAPartir": null
+    },
+    {
+      "id": "L025",
+      "titulo": "O verdadeiro regime anti-cancro",
+      "autor": "David Kharyat",
+      "estado": "Disponível",
+      "disponivelAPartir": null
+    },
+    {
+      "id": "L026",
+      "titulo": "Os cães de Salazar",
+      "autor": "Francisco Moita Flores",
+      "estado": "Disponível",
+      "disponivelAPartir": null
+    },
+    {
+      "id": "L027",
+      "titulo": "Pedra Pagã",
+      "autor": "Nora Roberts",
+      "estado": "Disponível",
+      "disponivelAPartir": null
+    },
+    {
+      "id": "L028",
+      "titulo": "Resgate",
+      "autor": "Danielle Steel",
+      "estado": "Disponível",
+      "disponivelAPartir": null
+    },
+    {
+      "id": "L029",
+      "titulo": "Salva por um escocês",
+      "autor": "Sarah Macleam",
+      "estado": "Disponível",
+      "disponivelAPartir": null
+    },
+    {
+      "id": "L030",
+      "titulo": "Só o amor importa",
+      "autor": "Karen M. Wyatt",
+      "estado": "Disponível",
+      "disponivelAPartir": null
+    },
+    {
+      "id": "L031",
+      "titulo": "Um refúgio para a vida",
+      "autor": "Nicholas Sparks",
+      "estado": "Disponível",
+      "disponivelAPartir": null
+    },
+    {
+      "id": "L032",
+      "titulo": "Uma Família Verde",
+      "autor": "Maria Dordio",
+      "estado": "Disponível",
+      "disponivelAPartir": null
+    },
+    {
+      "id": "L033",
+      "titulo": "Viagem ao Além",
+      "autor": "Jeffrey A. Marks",
+      "estado": "Disponível",
+      "disponivelAPartir": null
+    },
+    {
+      "id": "L034",
+      "titulo": "Vida organizada",
+      "autor": "Thais Godinho",
+      "estado": "Disponível",
+      "disponivelAPartir": null
+    },
+    {
+      "id": "L035",
+      "titulo": "Viver em tempos de mudança",
+      "autor": "Maria do Carmo Oliveira",
+      "estado": "Disponível",
+      "disponivelAPartir": null
+    }
+  ]
+}
