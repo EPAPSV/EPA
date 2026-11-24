@@ -105,7 +105,7 @@ function marcar() {
 }
 function escolher(i) {
   if (!livros[i].disponivel) return;
-  escolhido = livros[i]; btn.textContent = escolhido.titulo + " — " + escolhido.autor;
+  escolhido = livros[i]; btn.textContent = escolhido.titulo + (escolhido.autor ? " — " + escolhido.autor : "");
   cta.disabled = false; erro.textContent = ""; desenhar(); abrir(false); btn.focus();
 }
 btn.addEventListener("click", () => abrir(!lista.classList.contains("open")));
