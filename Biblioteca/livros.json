@@ -1,5 +1,5 @@
 {
- "atualizado": "2026-11-24T16:00:00Z",
+ "atualizado": "2026-11-24T16:30:00Z",
  "livros": [
   {
    "id": "L001",
@@ -43,15 +43,15 @@
   },
   {
    "id": "I016",
-   "titulo": "A maldição (Biblioteca da escola)",
-   "autor": "",
+   "titulo": "A maldição",
+   "autor": "John Grisham",
    "origem": "Biblioteca da escola",
    "estado": "Disponível",
    "disponivelAPartir": null
   },
   {
    "id": "L004",
-   "titulo": "A Maldição (John Grisham)",
+   "titulo": "A maldição",
    "autor": "John Grisham",
    "origem": "Biblioteca Municipal",
    "estado": "Disponível",
@@ -386,18 +386,18 @@
    "disponivelAPartir": null
   },
   {
-   "id": "L021",
-   "titulo": "Não forces a vida flui",
+   "id": "I005",
+   "titulo": "Não forces a vida, flui",
    "autor": "Manuel Clemente",
-   "origem": "Biblioteca Municipal",
+   "origem": "Biblioteca da escola",
    "estado": "Disponível",
    "disponivelAPartir": null
   },
   {
-   "id": "I005",
+   "id": "L021",
    "titulo": "Não forces a vida, flui",
-   "autor": "",
-   "origem": "Biblioteca da escola",
+   "autor": "Manuel Clemente",
+   "origem": "Biblioteca Municipal",
    "estado": "Disponível",
    "disponivelAPartir": null
   },
@@ -659,15 +659,15 @@
   },
   {
    "id": "I044",
-   "titulo": "Vida organizada (Biblioteca da escola)",
-   "autor": "",
+   "titulo": "Vida organizada",
+   "autor": "Thais Godinho",
    "origem": "Biblioteca da escola",
    "estado": "Disponível",
    "disponivelAPartir": null
   },
   {
    "id": "L034",
-   "titulo": "Vida organizada (Thais Godinho)",
+   "titulo": "Vida organizada",
    "autor": "Thais Godinho",
    "origem": "Biblioteca Municipal",
    "estado": "Disponível",
