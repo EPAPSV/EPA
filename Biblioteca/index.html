@@ -41,15 +41,6 @@
   button.cta { margin-top:8px; width:100%; padding:14px; font-size:17px; font-weight:bold; color:#fff; background:var(--verde);
                border:0; border-radius:8px; cursor:pointer; font-family:inherit; }
   button.cta:disabled { background:#b7c4b1; cursor:not-allowed; }
-  .req { display:none; max-width:980px; margin:0 auto; padding:24px 16px 48px; }
-  .req.aberto { display:block; }
-  .req .voltar { border:0; background:none; color:var(--verde); font-size:16px; font-weight:bold; cursor:pointer; padding:6px 0; font-family:inherit; }
-  .req .ficha { display:flex; gap:20px; flex-wrap:wrap; background:#fff; border:2px solid var(--borda); border-radius:12px; padding:16px; margin:8px 0 16px; }
-  .req .ficha .capa-g { width:180px; max-width:100%; flex:0 0 auto; }
-  .req .ficha .txt { flex:1; min-width:220px; }
-  .req .ficha h2 { margin:0 0 4px; color:var(--verde); }
-  .req iframe { width:100%; height:760px; border:2px solid var(--borda); border-radius:12px; background:#fff; }
-  .req .nota { font-size:13px; color:#555; margin:8px 0; }
   .rodape { margin-top:28px; font-size:12px; color:#666; }
 </style>
 </head>
@@ -74,21 +65,6 @@
   <div id="grelha" class="grelha" aria-live="polite"><div class="vazio">A carregar a lista…</div></div>
   <div class="rodape" id="atualizado"></div>
 </main>
-
-<section id="req" class="req" aria-labelledby="r-titulo">
-  <button type="button" class="voltar" id="voltar">← Escolher outro livro</button>
-  <div class="ficha">
-    <div class="capa-g" id="r-capa"></div>
-    <div class="txt">
-      <h2 id="r-titulo"></h2>
-      <div class="meta" id="r-meta"></div>
-      <p class="res" id="r-res"></p>
-      <p class="nota">Estás a requisitar este livro. Preenche os teus dados no formulário abaixo (a pergunta do livro já vem preenchida, não a alteres).</p>
-    </div>
-  </div>
-  <iframe id="r-form" title="Formulário de requisição"></iframe>
-  <p class="nota">Se o formulário não aparecer, <a id="r-link" href="#" target="_blank" rel="noopener">abre-o numa nova janela</a>.</p>
-</section>
 
 <div id="fundo" class="fundo" role="dialog" aria-modal="true" aria-labelledby="m-titulo">
   <div class="modal">
@@ -178,23 +154,7 @@ fundo.addEventListener("click", e => { if (e.target === fundo) fechar(); });
 document.addEventListener("keydown", e => { if (e.key === "Escape" && fundo.classList.contains("aberto")) fechar(); });
 cta.addEventListener("click", () => {
   if (!escolhido || !escolhido.disponivel) return;
-  const url = FORMS_URL.replace("{LIVRO}", encodeURIComponent(escolhido.titulo));
-  const rc = document.getElementById("r-capa"); rc.textContent = ""; rc.appendChild(capaEl(escolhido, 2));
-  document.getElementById("r-titulo").textContent = escolhido.titulo;
-  document.getElementById("r-meta").textContent = [escolhido.autor, escolhido.origem].filter(Boolean).join(" · ");
-  document.getElementById("r-res").textContent = escolhido.resumo || "";
-  document.getElementById("r-link").href = url;
-  document.getElementById("r-form").src = url + "&embed=true";
-  fundo.classList.remove("aberto");
-  document.querySelector("main").style.display = "none";
-  document.getElementById("req").classList.add("aberto");
-  window.scrollTo(0, 0);
-});
-document.getElementById("voltar").addEventListener("click", () => {
-  document.getElementById("req").classList.remove("aberto");
-  document.getElementById("r-form").src = "about:blank";
-  document.querySelector("main").style.display = "";
-  window.scrollTo(0, 0);
+  window.location.href = FORMS_URL.replace("{LIVRO}", encodeURIComponent(escolhido.titulo));
 });
 pesq.addEventListener("input", desenhar); filtro.addEventListener("change", desenhar);
 
